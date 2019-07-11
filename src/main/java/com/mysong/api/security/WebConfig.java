@@ -22,7 +22,7 @@ public class WebConfig implements WebMvcConfigurer {
         config.setAllowCredentials(true);
 
         List<String> allowedOrigins = new ArrayList<>();
-        allowedOrigins.add("http://localhost:4200");
+        allowedOrigins.add("*");
 
 
         List<String> allowedHeaders = new ArrayList<>();

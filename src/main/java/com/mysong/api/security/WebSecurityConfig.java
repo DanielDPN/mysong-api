@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.cors().and().csrf().disable().authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
-                .addFilterBefore(new JWTLoginFilter("/login/users", authenticationManager()),
+                .addFilterBefore(new JWTLoginFilter("/auth/login", authenticationManager()),
                         UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new JWTAuthenticationFilter(),
                         UsernamePasswordAuthenticationFilter.class);

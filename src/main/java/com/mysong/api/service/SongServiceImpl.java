@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -22,6 +23,11 @@ public class SongServiceImpl implements SongService {
     @Override
     public List<Song> findAll() {
         return songRepository.findAll();
+    }
+
+    @Override
+    public Optional<Song> findById(Long id) {
+        return songRepository.findById(id);
     }
 
 }

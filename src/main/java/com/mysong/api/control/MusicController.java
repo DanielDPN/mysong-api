@@ -60,8 +60,28 @@ public class MusicController extends BasicController {
         }
     }
 
+    @SuppressWarnings("Duplicates")
     @PostMapping("/songs")
     public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody Song song) {
+        Song response;
+        final Map<String, Object> result = new HashMap<>();
+        try {
+            response = songService.save(song);
+            result.put("success", true);
+            result.put("error", null);
+            result.put("body", response);
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("error", e.getMessage());
+            result.put("body", null);
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(result);
+        }
+    }
+
+    @SuppressWarnings("Duplicates")
+    @PutMapping("/songs")
+    public ResponseEntity<Map<String, Object>> update(@Valid @RequestBody Song song) {
         Song response;
         final Map<String, Object> result = new HashMap<>();
         try {

@@ -36,4 +36,10 @@ public class SongServiceImpl implements SongService {
         return songRepository.save(song);
     }
 
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
+        songRepository.deleteById(id);
+    }
+
 }

@@ -98,4 +98,21 @@ public class MusicController extends BasicController {
         }
     }
 
+    @DeleteMapping("/songs/{id}")
+    public ResponseEntity<Map<String, Object>> deleteById(@PathVariable Long id) {
+        final Map<String, Object> result = new HashMap<>();
+        try {
+            songService.deleteById(id);
+            result.put("success", true);
+            result.put("error", null);
+            result.put("body", "Som deletado");
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("error", e.getMessage());
+            result.put("body", null);
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(result);
+        }
+    }
+
 }

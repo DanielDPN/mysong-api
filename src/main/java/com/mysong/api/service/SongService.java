@@ -11,4 +11,6 @@ public interface SongService {
 
     Optional<Song> findById(Long id);
 
+    Song save(Song song);
+
 }

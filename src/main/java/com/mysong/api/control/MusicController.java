@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +48,24 @@ public class MusicController extends BasicController {
         final Map<String, Object> result = new HashMap<>();
         try {
             response = songService.findById(id);
+            result.put("success", true);
+            result.put("error", null);
+            result.put("body", response);
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("error", e.getMessage());
+            result.put("body", null);
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(result);
+        }
+    }
+
+    @PostMapping("/songs")
+    public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody Song song) {
+        Song response;
+        final Map<String, Object> result = new HashMap<>();
+        try {
+            response = songService.save(song);
             result.put("success", true);
             result.put("error", null);
             result.put("body", response);
